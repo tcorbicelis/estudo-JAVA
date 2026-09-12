@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Clientes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+
+        <h1>Sistema de Clientes</h1>
+
+        <section class="card">
+            <h2>Cadastrar cliente</h2>
+
+            <form id="clienteForm">
+
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Nome"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="cpf"
+                    placeholder="CPF"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="E-mail"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="telefone"
+                    placeholder="Telefone"
+                    required
+                >
+
+                <button type="submit">
+                    Cadastrar
+                </button>
+
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Clientes cadastrados</h2>
+
+            <button id="listarBtn">
+                Atualizar lista
+            </button>
+
+            <ul id="clientesLista"></ul>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

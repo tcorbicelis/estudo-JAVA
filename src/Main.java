@@ -201,18 +201,71 @@ public class Main {
 
 
                 // ========================================
-                // EXCLUIR CLIENTE
-                // ========================================
+// EXCLUIR CLIENTE
+// ========================================
 
-                case 5:
+case 5:
 
-                    System.out.println("\n========================================");
-                    System.out.println("          EXCLUIR CLIENTE");
-                    System.out.println("========================================");
+    System.out.println("\n========================================");
+    System.out.println("          EXCLUIR CLIENTE");
+    System.out.println("========================================");
 
-                    System.out.println("Funcionalidade em desenvolvimento...");
+    if (clientes.isEmpty()) {
 
-                    break;
+        System.out.println("Nenhum cliente cadastrado.");
+
+        break;
+    }
+
+    System.out.print("Digite o ID do cliente: ");
+    int idExcluir = scanner.nextInt();
+
+    Cliente clienteExcluir = null;
+
+    // Procura o cliente pelo ID
+    for (Cliente c : clientes) {
+
+        if (c.getId() == idExcluir) {
+
+            clienteExcluir = c;
+
+            break;
+        }
+    }
+
+    // Verifica se encontrou o cliente
+    if (clienteExcluir == null) {
+
+        System.out.println("\nCliente não encontrado.");
+
+    } else {
+
+        System.out.println("\nCliente encontrado!");
+        System.out.println("----------------------------------------");
+
+        clienteExcluir.exibirDados();
+
+        System.out.println("----------------------------------------");
+        System.out.println("Deseja realmente excluir este cliente?");
+        System.out.println("1 - Sim");
+        System.out.println("2 - Não");
+        System.out.print("Escolha: ");
+
+        int confirmacao = scanner.nextInt();
+
+        if (confirmacao == 1) {
+
+            clientes.remove(clienteExcluir);
+
+            System.out.println("\nCliente excluído com sucesso!");
+
+        } else {
+
+            System.out.println("\nExclusão cancelada.");
+        }
+    }
+
+    break;
 
 
                 // ========================================

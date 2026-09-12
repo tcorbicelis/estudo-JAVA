@@ -2,14 +2,18 @@ package sistema_clientes;
 
 public class Cliente {
 
-    private int id;
+    private Integer id;
     private String nome;
     private String cpf;
     private String email;
     private String telefone;
 
-    // Construtor
-    public Cliente(int id, String nome, String cpf, String email, String telefone) {
+    // Construtor vazio necessário para o Spring Boot
+    public Cliente() {
+    }
+
+    // Construtor completo
+    public Cliente(Integer id, String nome, String cpf, String email, String telefone) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -18,7 +22,7 @@ public class Cliente {
     }
 
     // GETTERS
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -39,6 +43,10 @@ public class Cliente {
     }
 
     // SETTERS
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

@@ -8,11 +8,11 @@ formulario.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const cliente = {
-        id: Date.now(),
-        nome: document.getElementById("nome").value,
-        cpf: document.getElementById("cpf").value,
-        email: document.getElementById("email").value,
-        telefone: document.getElementById("telefone").value
+        id: 0,
+        nome: document.getElementById("nome").value.trim(),
+        cpf: document.getElementById("cpf").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        telefone: document.getElementById("telefone").value.trim()
     };
 
     try {
@@ -24,25 +24,43 @@ formulario.addEventListener("submit", async function (event) {
             body: JSON.stringify(cliente)
         });
 
+        const textoResposta = await resposta.text();
+
+        console.log("Status:", resposta.status);
+        console.log("Resposta:", textoResposta);
+
         if (!resposta.ok) {
-            throw new Error("Erro ao cadastrar cliente.");
+            throw new Error(
+                `Erro ${resposta.status}: ${
+                    textoResposta || "Falha no servidor"
+                }`
+            );
         }
 
         alert("Cliente cadastrado com sucesso!");
 
         formulario.reset();
 
-        listarClientes();
+        await listarClientes();
 
     } catch (erro) {
-        alert("Não foi possível cadastrar o cliente.");
-        console.error(erro);
+        console.error("Erro ao cadastrar:", erro);
+
+        alert(
+            "Não foi possível cadastrar o cliente.\n\n" +
+            erro.message
+        );
     }
 });
 
 async function listarClientes() {
     try {
         const resposta = await fetch(API_URL);
+
+        if (!resposta.ok) {
+            throw new Error(`Erro ao listar clientes: ${resposta.status}`);
+        }
+
         const clientes = await resposta.json();
 
         lista.innerHTML = "";
@@ -51,14 +69,22 @@ async function listarClientes() {
             const item = document.createElement("li");
 
             item.textContent =
-                `${cliente.nome} - ${cliente.email} - ${cliente.telefone}`;
+                `ID: ${cliente.id} - ` +
+                `${cliente.nome} - ` +
+                `${cliente.cpf} - ` +
+                `${cliente.email} - ` +
+                `${cliente.telefone}`;
 
             lista.appendChild(item);
         });
 
     } catch (erro) {
-        alert("Não foi possível carregar os clientes.");
-        console.error(erro);
+        console.error("Erro ao carregar clientes:", erro);
+
+        alert(
+            "Não foi possível carregar os clientes.\n\n" +
+            erro.message
+        );
     }
 }
 

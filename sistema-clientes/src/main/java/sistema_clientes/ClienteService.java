@@ -6,9 +6,17 @@ public class ClienteService {
 
     private ArrayList<Cliente> clientes = new ArrayList<>();
 
+    private int proximoId = 1;
+
     // Cadastrar cliente
-    public void cadastrar(Cliente cliente) {
+    public Cliente cadastrar(Cliente cliente) {
+
+        cliente.setId(proximoId);
+        proximoId++;
+
         clientes.add(cliente);
+
+        return cliente;
     }
 
     // Listar clientes
@@ -21,7 +29,8 @@ public class ClienteService {
 
         for (Cliente cliente : clientes) {
 
-            if (cliente.getId() == id) {
+            if (cliente.getId() != null
+                    && cliente.getId().equals(id)) {
                 return cliente;
             }
         }
